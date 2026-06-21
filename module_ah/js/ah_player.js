@@ -43,6 +43,9 @@ class akiros_hexed_player extends HTMLElement {
 
         </div>
         <div class="top_right_panel">
+            <input type="text" class="seek" placeholder="00:00" style="width: 60px;">
+            <button class="button " id="btn_seek" onclick="seekToTime(); changeSeekIcon()"><img src="content/fa32/correct_skiper/hourglass-1.png" alt="no alt"></button>
+                            
             <!--<button class="button " onclick="toggleMobileMode()"><img src="content/fa32/mode/phone.png" alt="no alt"></button>-->
         </div>
         <div class="controls"> <!-- Cool stuff-->
@@ -74,9 +77,6 @@ class akiros_hexed_player extends HTMLElement {
                         <h2 class="time">00.00/00.00</h2>
     
                         <div class="r_b">
-                            <input type="text" class="seek" placeholder="00:00">
-                            <button class="button " onclick="seekToTime(); changeSeekIcon()"><img src="content/fa32/correct_skiper/hourglass-1.png" alt="no alt"></button>
-                            
                             <button class="button s_button" onclick="toggleSettings()"><img src="content/fa32/setting.png" alt="no alt"></button>
                             <button class="button fs_button" onclick="togglefs()"><img src="content/fa32/compress.png" alt="no alt"></button>
                         </div>
