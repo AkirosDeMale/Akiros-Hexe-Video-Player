@@ -63,7 +63,12 @@ html, body {
     background: black;
 }
 
+@media (min-height: 300px) {
 
+    .bar {
+        margin: 0 0 16px 0; /* вместо bottom */
+    }
+}
 .bar {
     position: relative;
     width: 99%;
@@ -154,11 +159,13 @@ html, body {
     z-index: 20;
 }
 .l_b {
+    flex-wrap: wrap;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 .r_b {
+    flex-wrap: wrap;
     margin-left: auto;
     display: flex;
     align-items: center;
@@ -509,6 +516,8 @@ html, body {
 
 
 .seek {
+    width: 15%;
+    transform: translateY(-50%, -50%);
     transition: 250ms;
     background: rgba(0,0,0,0.6);
     border: 2px solid rgba(0, 126, 84, 0);
@@ -547,5 +556,4 @@ html, body {
     .play_button {
         display: none;
     }
-    
 }
