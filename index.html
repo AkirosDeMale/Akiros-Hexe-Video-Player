@@ -75,8 +75,8 @@
 
         /* ===== HERO ===== */
         .hero {
-            width: 100%;
-            height: 70vh;
+            width: 100vh;
+            height: 30vh;
             border-radius: 16px;
             overflow: hidden;
             margin-bottom: 20px;
@@ -127,26 +127,54 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
-            .layout {
-                flex-direction: column;
+
+            body {
+                overflow-x: hidden;
             }
 
+            .layout {
+                flex-direction: column;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            /* SIDEBAR становится верхним меню */
             .sidebar {
                 width: 100%;
                 flex-direction: row;
                 overflow-x: auto;
+                white-space: nowrap;
+                padding: 10px;
             }
 
             .sidebar button {
                 flex-shrink: 0;
+                font-size: 14px;
+                padding: 8px 12px;
             }
 
+            /* MAIN = ВСЯ ширина */
+            .main {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            /* HERO = норм масштаб */
             .hero {
-                height: 45vh;
+                width: 100%;
+                height: 40vh;
+                border-radius: 10px;
             }
 
+            /* FEED становится вертикальным (чтобы не ломать сетку) */
             #feed {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                grid-template-columns: 1fr;
+            }
+
+            /* комментарии компактнее */
+            #comments div {
+                font-size: 14px;
             }
         }
         </style>
