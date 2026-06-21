@@ -52,6 +52,8 @@ html, body {
     touch-action: manipulation;
     width: 100%;
     height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
     position: relative;
 }
 .video {
@@ -527,3 +529,22 @@ html, body {
     background: rgba(0,0,0,0.6);
 }
 
+
+@media (max-width: 768px) {
+    .controls {
+        padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+
+    .buttons {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .r_b {
+        flex-wrap: wrap;
+    }
+
+    .seek {
+        width: 80px;
+    }
+}
