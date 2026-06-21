@@ -75,15 +75,18 @@
 
         /* ===== HERO ===== */
         .hero {
-            width: 100vh;
-            height: 30vh;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            background: #0b0b10;
-            box-shadow: 0 0 40px rgba(0, 255, 195, 0.08);
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
         }
-
+        @media (max-width: 768px) {
+            .hero {
+                width: 100%;
+                max-width: 100%;
+                aspect-ratio: 16 / 9;
+            }
+        }
         /* ===== SECTIONS ===== */
         .section {
             margin-top: 20px;
