@@ -231,6 +231,27 @@ class akiros_hexed_player extends HTMLElement {
                 //this.setQuality(src);
             });
         });
+        this.player.addEventListener("click", (e) => {
+            if (e.target.closest(".controls") ||
+                e.target.closest(".settings_menu") ||
+                e.target.closest(".top_left_panel")) return;
+            const rect = this.player.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+
+            const width = rect.width;
+
+            // зона 25% слева = назад
+            if (x < width * 0.25) {
+                this.video.currentTime = Math.max(0, this.video.currentTime - 10);
+                this.showSkipIcon("back");
+            }
+
+            // зона 25% справа = вперёд
+            else if (x > width * 0.75) {
+                this.video.currentTime = Math.min(this.video.duration, this.video.currentTime + 10);
+                this.showSkipIcon("forward");
+            }
+        });
     }
     keybinds(e) {
         const tag = document.activeElement.tagName;
@@ -322,12 +343,24 @@ class akiros_hexed_player extends HTMLElement {
             tabs[1].classList.add("active");
         }
     }
-    toggleFS() {
+    async toggleFS() {
         if (!document.fullscreenElement) {
-            this.player.requestFullscreen?.();
+            await this.player.requestFullscreen?.();
+
+            try {
+                await screen.orientation.lock("landscape");
+            } catch (e) {
+                console.log("Orientation lock not supported");
+            }
+
             this.fsBtn.src = this.expandIco;
         } else {
             document.exitFullscreen?.();
+
+            try {
+                await screen.orientation.unlock();
+            } catch (e) {}
+
             this.fsBtn.src = this.compressIco;
         }
     }
@@ -527,7 +560,7 @@ class akiros_hexed_player extends HTMLElement {
     }
     async loadTitle() {
         try {
-            const res = await fetch("video/data/index.json");
+            const res = await fetch(new URL("video/data/index.json", location.href));
             const data = await res.json();
 
             if (!data.titles) {
@@ -544,7 +577,7 @@ class akiros_hexed_player extends HTMLElement {
                 return;
             }
 
-            const epRes = await fetch(title.path);
+            const epRes = await fetch(new URL(title.path, location.href));
             const epData = await epRes.json();
 
             if (!epData.episodes) {
@@ -563,7 +596,7 @@ class akiros_hexed_player extends HTMLElement {
     }
     async loadEpisodes() {
         try {
-            const res = await fetch("video/data/test.json");
+            const res = await fetch(new URL("video/data/test.json", location.href));
             const data = await res.json();
 
             this.episodes = data.episodes || [];
@@ -612,7 +645,7 @@ class akiros_hexed_player extends HTMLElement {
     loadEpisode(i) {
         this.current = i;
 
-        this.video.src = this.episodes[i].src;
+        this.video.src = new URL(this.episodes[i].src, location.href).href;
         this.video.load();
     
         this.updateActiveEpisode();
