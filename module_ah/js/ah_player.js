@@ -231,26 +231,33 @@ class akiros_hexed_player extends HTMLElement {
                 //this.setQuality(src);
             });
         });
-        this.player.addEventListener("click", (e) => {
-            if (e.target.closest(".controls") ||
-                e.target.closest(".settings_menu") ||
-                e.target.closest(".top_left_panel")) return;
-            const rect = this.player.getBoundingClientRect();
-            const x = e.clientX - rect.left;
+        let lastTap = 0;
 
-            const width = rect.width;
+        this.player.addEventListener("touchend", (e) => {
+            const now = Date.now();
+            const diff = now - lastTap;
 
-            // зона 25% слева = назад
-            if (x < width * 0.25) {
-                this.video.currentTime = Math.max(0, this.video.currentTime - 10);
-                this.showSkipIcon("back");
+            // двойной тап (300мс окно)
+            if (diff < 300 && diff > 0) {
+
+                const rect = this.player.getBoundingClientRect();
+                const x = e.changedTouches[0].clientX - rect.left;
+                const width = rect.width;
+
+                // левая сторона
+                if (x < width * 0.15) {
+                    this.video.currentTime = Math.max(0, this.video.currentTime - 10);
+                    this.showSkipIcon("back");
+                }
+
+                // правая сторона
+                else if (x > width * 0.85) {
+                    this.video.currentTime = Math.min(this.video.duration, this.video.currentTime + 10);
+                    this.showSkipIcon("forward");
+                }
             }
 
-            // зона 25% справа = вперёд
-            else if (x > width * 0.75) {
-                this.video.currentTime = Math.min(this.video.duration, this.video.currentTime + 10);
-                this.showSkipIcon("forward");
-            }
+            lastTap = now;
         });
     }
     keybinds(e) {
