@@ -98,77 +98,143 @@
     <script src="js/script.js"></script>
     <script src="js/func.js"></script>
     -->
-    <h1>Video Player Test</h1>
+    <div class="layout">
 
-    <div class="player_local">
-        <akiros-hexed-player title="test"></akiros-hexed-player>
+        <aside class="sidebar">
+            <div class="logo">AKIROS</div>
+
+            <button>Главная</button>
+            <button>Каталог</button>
+            <button>Популярное</button>
+            <button>Расписание</button>
+        </aside>
+
+        <main class="main">
+
+            <section class="hero">
+                <akiros-hexed-player title="test"></akiros-hexed-player>
+            </section>
+            <section class="section">
+                <h2>Comments</h2>
+                <div id="comments"></div>
+            </section>
+
+        </main>
+        <script src="module_ah/js/ah_player.js"></script>
     </div>
     <style>
-        .player_local {
-            width: 60vw;
-            height: 80vh;
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(
+                180deg,
+                rgba(0, 29, 20, 0.9) 25%,
+                rgba(0, 104, 69, 0.9) 100%
+            );
+            color: white;
+        }
+
+        /* ===== LAYOUT ===== */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 20%;
+            background: linear-gradient(
+                120deg,
+                rgba(0, 26, 84, 0.2) 0%,
+                rgba(0, 55, 70, 0.3) 50%,
+                rgba(0, 126, 84, 0.4) 100%
+            );
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-right: 1px solid #222;
+        }
+
+        .sidebar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: rgba(0, 255, 195, 1);
+        }
+
+        .sidebar button {
+            background: transparent;
+            border: none;
+            color: #aaa;
+            text-align: left;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .sidebar button:hover {
+            background: linear-gradient(
+                120deg,
+                rgba(0, 6, 8, 0.2) 0%,
+                rgba(0, 25, 80, 0.3) 50%,
+                rgba(0, 26, 84, 0.5) 100%
+            );
+            color: white;
+        }
+
+        /* ===== MAIN ===== */
+        .main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* ===== HERO PLAYER ===== */
+        .hero {
+            padding-left: 4vw;
+            width: 90%;
+            height: 70vh;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section h2 {
+            margin: 20px 0 10px;
+            font-size: 18px;
+            color: rgba(0, 126, 84, 0.9);
+        }
+
+        /* ===== FEED CARDS ===== */
+        #feed {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        #feed div {
+            background: #161621;
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #222;
+        }
+
+        #feed div:hover {
+            transform: scale(1.03);
+            border-color: rgba(0, 126, 84, 0.9);
+        }
+
+        /* ===== COMMENTS ===== */
+        #comments div {
+            background: #14141d;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid rgba(0, 126, 84, 0.9);
         }
     </style>
-    <script src="module_ah/js/ah_player.js"></script>
-
-    <hr>
-
-    <h2>Feed</h2>
-
-    <div id="feed"></div>
-
-    <hr>
-
-    <h2>Comments</h2>
-
-    <div id="comments"></div>
-
-    <script src="player.js"></script>
-
-    <script>
-    const feed = document.getElementById("feed");
-    const comments = document.getElementById("comments");
-
-    const posts = [
-        "New episode dropped",
-        "Recommended: Episode 2",
-        "Trending anime today",
-        "Someone said ep 3 is insane",
-        "Next update coming soon"
-    ];
-
-    let i = 0;
-
-    function renderFeed() {
-        feed.innerHTML = "";
-
-        for (let j = 0; j < 3; j++) {
-            const div = document.createElement("div");
-            div.textContent = posts[(i + j) % posts.length];
-            div.onclick = () => {
-                i++;
-                renderFeed();
-            };
-            feed.appendChild(div);
-        }
-    }
-
-    renderFeed();
-
-    // фейк комментарии
-    const fakeComments = [
-        "bro this is fire",
-        "why is episode 2 so good?",
-        "animation is crazy",
-        "next episode WHEN??",
-        "10/10 no cap"
-    ];
-
-    fakeComments.forEach(c => {
-        const div = document.createElement("div");
-        div.textContent = c;
-        comments.appendChild(div);
-    });
-    </script>
 </body>
 </html>
