@@ -4,6 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(
+                180deg,
+                rgba(0, 29, 20, 0.9) 25%,
+                rgba(0, 104, 69, 0.9) 100%
+            );
+            color: white;
+        }
+
+        /* ===== LAYOUT ===== */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 20%;
+            background: linear-gradient(
+                120deg,
+                rgba(0, 26, 84, 0.2) 0%,
+                rgba(0, 55, 70, 0.3) 50%,
+                rgba(0, 126, 84, 0.4) 100%
+            );
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-right: 1px solid #222;
+        }
+
+        .sidebar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: rgba(0, 255, 195, 1);
+        }
+
+        .sidebar button {
+            background: transparent;
+            border: none;
+            color: #aaa;
+            text-align: left;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .sidebar button:hover {
+            background: linear-gradient(
+                120deg,
+                rgba(0, 6, 8, 0.2) 0%,
+                rgba(0, 25, 80, 0.3) 50%,
+                rgba(0, 26, 84, 0.5) 100%
+            );
+            color: white;
+        }
+
+        /* ===== MAIN ===== */
+        .main {
+            flex: 1;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            width: 100%;
+            height: 70vh;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: #0b0b10;
+            box-shadow: 0 0 40px rgba(0, 255, 195, 0.08);
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            margin-top: 20px;
+        }
+
+        .section h2 {
+            margin: 20px 0 10px;
+            font-size: 18px;
+            color: rgba(0, 126, 84, 0.9);
+        }
+
+        /* ===== FEED ===== */
+        #feed {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        #feed div {
+            background: #161621;
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #222;
+        }
+
+        #feed div:hover {
+            transform: scale(1.03);
+            border-color: rgba(0, 126, 84, 0.9);
+        }
+
+        /* ===== COMMENTS ===== */
+        #comments div {
+            background: #14141d;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid rgba(0, 126, 84, 0.9);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+            }
+
+            .sidebar button {
+                flex-shrink: 0;
+            }
+
+            .hero {
+                height: 45vh;
+            }
+
+            #feed {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+        </style>
 </head>
 <body>
     <!--
@@ -100,141 +246,78 @@
     -->
     <div class="layout">
 
-        <aside class="sidebar">
-            <div class="logo">AKIROS</div>
+        <div class="sidebar">
+            <div class="logo">Akiros</div>
+            <button>Home</button>
+            <button>Trending</button>
+            <button>Library</button>
+        </div>
 
-            <button>Главная</button>
-            <button>Каталог</button>
-            <button>Популярное</button>
-            <button>Расписание</button>
-        </aside>
+        <div class="main">
 
-        <main class="main">
-
-            <section class="hero">
+            <div class="hero">
                 <akiros-hexed-player title="test"></akiros-hexed-player>
-            </section>
-            <section class="section">
+            </div>
+
+            <div class="section">
+                <h2>Feed</h2>
+                <div id="feed"></div>
+            </div>
+
+            <div class="section">
                 <h2>Comments</h2>
                 <div id="comments"></div>
-            </section>
+            </div>
 
-        </main>
-        <script src="module_ah/js/ah_player.js"></script>
+        </div>
+
     </div>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: linear-gradient(
-                180deg,
-                rgba(0, 29, 20, 0.9) 25%,
-                rgba(0, 104, 69, 0.9) 100%
-            );
-            color: white;
-        }
 
-        /* ===== LAYOUT ===== */
-        .layout {
-            display: flex;
-            min-height: 100vh;
-        }
+    <script src="module_ah/js/ah_player.js"></script>
 
-        /* ===== SIDEBAR ===== */
-        .sidebar {
-            width: 20%;
-            background: linear-gradient(
-                120deg,
-                rgba(0, 26, 84, 0.2) 0%,
-                rgba(0, 55, 70, 0.3) 50%,
-                rgba(0, 126, 84, 0.4) 100%
-            );
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            border-right: 1px solid #222;
-        }
+    <script>
+    const feed = document.getElementById("feed");
+    const comments = document.getElementById("comments");
 
-        .sidebar .logo {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: rgba(0, 255, 195, 1);
-        }
+    const posts = [
+        "New episode dropped",
+        "Recommended: Episode 2",
+        "Trending anime today",
+        "Someone said ep 3 is insane",
+        "Next update coming soon"
+    ];
 
-        .sidebar button {
-            background: transparent;
-            border: none;
-            color: #aaa;
-            text-align: left;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 8px;
-        }
+    let i = 0;
 
-        .sidebar button:hover {
-            background: linear-gradient(
-                120deg,
-                rgba(0, 6, 8, 0.2) 0%,
-                rgba(0, 25, 80, 0.3) 50%,
-                rgba(0, 26, 84, 0.5) 100%
-            );
-            color: white;
-        }
+    function renderFeed() {
+        feed.innerHTML = "";
 
-        /* ===== MAIN ===== */
-        .main {
-            flex: 1;
-            padding: 20px;
+        for (let j = 0; j < 4; j++) {
+            const div = document.createElement("div");
+            div.textContent = posts[(i + j) % posts.length];
+            div.onclick = () => {
+                i++;
+                renderFeed();
+            };
+            feed.appendChild(div);
         }
+    }
 
-        /* ===== HERO PLAYER ===== */
-        .hero {
-            padding-left: 4vw;
-            width: 90%;
-            height: 70vh;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
+    renderFeed();
 
-        /* ===== SECTIONS ===== */
-        .section h2 {
-            margin: 20px 0 10px;
-            font-size: 18px;
-            color: rgba(0, 126, 84, 0.9);
-        }
+    const fakeComments = [
+        "bro this is fire",
+        "why is episode 2 so good?",
+        "animation is crazy",
+        "next episode WHEN??",
+        "10/10 no cap"
+    ];
 
-        /* ===== FEED CARDS ===== */
-        #feed {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 12px;
-        }
-
-        #feed div {
-            background: #161621;
-            padding: 14px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 1px solid #222;
-        }
-
-        #feed div:hover {
-            transform: scale(1.03);
-            border-color: rgba(0, 126, 84, 0.9);
-        }
-
-        /* ===== COMMENTS ===== */
-        #comments div {
-            background: #14141d;
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            border-left: 3px solid rgba(0, 126, 84, 0.9);
-        }
-    </style>
+    fakeComments.forEach(c => {
+        const div = document.createElement("div");
+        div.textContent = c;
+        comments.appendChild(div);
+    });
+    </script>
 </body>
 </html>
