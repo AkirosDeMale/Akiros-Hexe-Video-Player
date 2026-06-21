@@ -37,8 +37,9 @@ html, body {
     flex-direction: column;
     gap: 10px;
 
-    padding: 10px 1vw 2vh;
     box-sizing: border-box;
+
+    justify-content: flex-end;
 }
 
 .controls.hidden {
@@ -63,12 +64,7 @@ html, body {
     background: black;
 }
 
-@media (min-height: 300px) {
 
-    .bar {
-        margin: 0 0 16px 0; /* вместо bottom */
-    }
-}
 .bar {
     position: relative;
     width: 99%;
@@ -530,21 +526,27 @@ html, body {
 }
 
 
-@media (max-width: 768px) {
-    .controls {
-        padding-bottom: calc(10px + env(safe-area-inset-bottom));
-    }
-
+@media (max-width: 468px) {
     .buttons {
         flex-wrap: wrap;
-        gap: 6px;
+        position: relative;
+        bottom: auto;
     }
 
-    .r_b {
+    .r_b, .l_b {
         flex-wrap: wrap;
     }
 
     .seek {
-        width: 80px;
+        width: 20px;
     }
+
+    .controls {
+        padding-bottom: 14px;
+    }
+
+    .play_button {
+        display: none;
+    }
+
 }
