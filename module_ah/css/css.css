@@ -37,9 +37,8 @@ html, body {
     flex-direction: column;
     gap: 10px;
 
+    padding: 10px 1vw 2vh;
     box-sizing: border-box;
-
-    justify-content: flex-end;
 }
 
 .controls.hidden {
@@ -548,5 +547,5 @@ html, body {
     .play_button {
         display: none;
     }
-
+    
 }
